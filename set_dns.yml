@@ -1,0 +1,20 @@
+---
+- name: Set Primary DNS to (your dns replacement)
+  hosts: fortigate_routers
+  gather_facts: no
+
+  tasks:
+    - name: Execute DNS configuration commands
+      ansible.builtin.shell: |
+        sshpass -p '{{ ansible_password }}' ssh -o StrictHostKeyChecking=no {{ ansible_user }}@{{ ansible_host }} << 'EOF'
+        config system dns
+        set primary {{put your new dns here}}
+        end
+        execute backup config
+        EOF
+      delegate_to: localhost
+      register: result
+
+    - name: Display result
+      debug:
+        var: result
