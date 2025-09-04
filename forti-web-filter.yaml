@@ -2,7 +2,7 @@
   hosts: localhost
   gather_facts: no
   vars:
-    base_url: "https://10.10.40.59:65443"
+    base_url: "https://{{add_your_fortigate_gui_ip:port}}"
     api_path: "/api/v2/cmdb/webfilter/urlfilter/1/entries"
     vdom: "root"
     auth_token: "{{ fortigate_token }}"
